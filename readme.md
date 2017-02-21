@@ -19,7 +19,7 @@ Dagger2是Dagger1的分支，由谷歌公司接手开发，目前的版本是2.0
 
 
 ##Dagger2 Demo结构
-![mahua](1.png =680x340)
+![mahua](1.png)
 
 * `@Component`用于构建接口，该接口把所有封装在一起。这里，我们定义需要依赖的模块(或组件)。这里定义了那些图依赖应当公开可见(可注入)，我们的组件可以注入哪里。@Component是连接@Module和@Inject的桥梁。
 * `@moudule`提供对象的实例化   以 @Provides 标明方法提供依赖对象
