@@ -15,11 +15,11 @@ Dagger2是Dagger1的分支，由谷歌公司接手开发，目前的版本是2.0
 * @Component: Components从根本上来说就是一个注入器，也可以说是@Inject和@Module的桥梁，它的主要作用就是连接这两个部分。 Components可以提供所有定义了的类型的实例，比如：我们必须用@Component注解一个接口然后列出所有的@Modules组成该组件，如 果缺失了任何一块都会在编译的时候报错。所有的组件都可以通过它的modules知道依赖的范围。
 * @Scope: Scopes可是非常的有用，Dagger2可以通过自定义注解限定注解作用域。后面会演示一个例子，这是一个非常强大的特点，因为就如前面说的一样，没 必要让每个对象都去了解如何管理他们的实例。在scope的例子中，我们用自定义Demo中的`@SecondScope`注解类，只要标注了该注解的方法对象 都只能被SecondActivity所调用，而MainActivity则不能调用。同时Scopes作用域又是单列模式  和`@Singleton`一样，区别是`@Singleton`的作用域是全局 而自定义的Scope是可以限制区域 不让外部类调用。
 * @Qualifier: 当类的类型不足以鉴别一个依赖的时候，我们就可以使用这个注解标示。例如：在Android中，我们会需要不同类型的context，所以我们就可以定义 qualifier注解“@ForApplication”和“@ForActivity”，这样当注入一个context的时候，我们就可以告诉 Dagger我们想要哪种类型的context。`@Named`是Dagger2对于@Qualifier一个默认实现，我们也可以自定义
-![mahua](2.jpg =611x475)
+![mahua](2.png =611x475)
 
 
 ##Dagger2 Demo结构
-![mahua](1.jpg =680x340)
+![mahua](1.png =680x340)
 
 * `@Component`用于构建接口，该接口把所有封装在一起。这里，我们定义需要依赖的模块(或组件)。这里定义了那些图依赖应当公开可见(可注入)，我们的组件可以注入哪里。@Component是连接@Module和@Inject的桥梁。
 * `@moudule`提供对象的实例化   以 @Provides 标明方法提供依赖对象
