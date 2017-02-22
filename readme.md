@@ -42,7 +42,6 @@ Dagger2是Dagger1的分支，由谷歌公司接手开发，目前的版本是2.0
 * @Qualifier: 当类的类型不足以鉴别一个依赖的时候,我们就可以使用这个注解标示。例如：在Android中，我们会需要不同类型的contextv所以我们就可以定义 qualifier注解“@ForApplication”和“@ForActivity”,这样当注入一个context的时候，我们就可以告诉 Dagger我们想要哪种类型的context。`@Named`是Dagger2对于@Qualifier一个默认实现,我们也可以自定义
 
 ![mahua](2.png)
-
 ####2.3 Demo结构
 ![mahua](1.png)
 
