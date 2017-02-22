@@ -33,7 +33,7 @@ Dagger2是Dagger1的分支，由谷歌公司接手开发，目前的版本是2.0
 当然所有这些很棒的特点都需要付出一个代价，那就是缺乏灵活性，例如：Dagger2没用反射所以没有动态机制。
 
 ####2.2 六大注解
-* @Inject: 通常在需要依赖的地方使用这个注解。换句话说，你用它告诉Dagger这个类或者字段需要依赖注入。这样，Dagger就会构造一个这个类的实例并满足他们的依赖。
+* @Inject: 通常在需要依赖的地方使用这个注解。换句话说，你用它告诉Dagger这个类或者字段需要依赖注入。这样，Dagger就会构造一个这个类的实例并满足他们的依赖。添加依赖注入对象，如果是直接在对象所在类里面注入，则前缀一定要大写，否则会报错
 * @Module: Modules类里面的方法专门提供依赖，所以我们定义一个类，用@Module注解，这样Dagger在构造类的实例的时候，就知道从哪里去找到需要的 依赖。modules的一个重要特征是它们设计为分区并组合在一起（比如说，在我们的   app中可以有多个组成在一起的modules）。
 * @Provide: 在modules中，我们定义的方法是用这个注解，以此来告诉Dagger我们想要构造对象并提供这些依赖。
 * @Component: Components从根本上来说就是一个注入器，也可以说是@Inject和@Module的桥梁，它的主要作用就是连接这两个部分。 Components可以提供所有定义了的类型的实例，比如：我们必须用@Component注解一个接口然后列出所有的@Modules组成该组件，如 果缺失了任何一块都会在编译的时候报错。所有的组件都可以通过它的modules知道依赖的范围。
@@ -42,10 +42,19 @@ Dagger2是Dagger1的分支，由谷歌公司接手开发，目前的版本是2.0
 * @Qualifier: 当类的类型不足以鉴别一个依赖的时候,我们就可以使用这个注解标示。例如：在Android中，我们会需要不同类型的contextv所以我们就可以定义 qualifier注解“@ForApplication”和“@ForActivity”,这样当注入一个context的时候，我们就可以告诉 Dagger我们想要哪种类型的context。`@Named`是Dagger2对于@Qualifier一个默认实现,我们也可以自定义
 
 ![mahua](2.png)
-####2.3 Demo结构
+##3 Demo
+####3.1 简介
+
 ![mahua](1.png)
 
-* `@Component`用于构建接口，该接口把所有封装在一起。这里，我们定义需要依赖的模块(或组件)。这里定义了那些图依赖应当公开可见(可注入)，我们的组件可以注入哪里。@Component是连接@Module和@Inject的桥梁。
-* `@moudule`提供对象的实例化   以 @Provides 标明方法提供依赖对象
+* 从图中 @MainComponent用于构建接口，该接口把所有封装在一起。这里，我们定义需要依赖的模块(或组件)即@MainModule。这里定义了那些图依赖应当公开可见(可注入)，我们的组件可以注入哪里。@MainComponent是连接@MainModule和@Inject的桥梁。
+* @MainModule提供对象的实例化   以 @Provides 标明方法提供依赖对象   
+* MainAppAplication 作为app程序的入口，起到一个提供基础类的作用，它的MainAppComponent被依赖（dependencies）于MainComponent,MainActivity可以注入MainAppComponent所依赖的对象，但是MainAppComponent需要对其MainAppModule中以 @Provides 标明方法提供依赖对象进行定义 即User getUser()以让MainActivity获取其注入的对象
+* SecondComponent是其子Component(SubComponent)可以完全继承MainAppComponent的所有依赖对象。
+
+###### SubComponent与dependencies 区别 
+Subcomponent其功能效果优点类似component的dependencies。都相当于相当于子父类继承关系，但是使用@Subcomponent不需要在父component中显式添加子component需要用到的对象，只需要添加返回子Component的方法即可，子Component能自动在父Component中查找缺失的依赖。
+
+
 
 
