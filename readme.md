@@ -52,7 +52,7 @@ Dagger2是Dagger1的分支，由谷歌公司接手开发，目前的版本是2.0
 * MainAppAplication 作为app程序的入口，起到一个提供基础类的作用，它的MainAppComponent被依赖（dependencies）于MainComponent,MainActivity可以注入MainAppComponent所依赖的对象，但是MainAppComponent需要对其MainAppModule中以 @Provides 标明方法提供依赖对象进行定义 即User getUser()以让MainActivity获取其注入的对象
 * SecondComponent是其子Component(SubComponent)可以完全继承MainAppComponent的所有依赖对象。
 
-###### SubComponent与dependencies 区别 
+##### SubComponent与dependencies 区别 
 Subcomponent其功能效果优点类似component的dependencies。都相当于相当于子父类继承关系，但是使用@Subcomponent不需要在父component中显式添加子component需要用到的对象，只需要添加返回子Component的方法即可，子Component能自动在父Component中查找缺失的依赖。
 
 
