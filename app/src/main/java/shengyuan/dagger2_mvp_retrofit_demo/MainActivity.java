@@ -41,7 +41,7 @@ public class MainActivity extends BaseActivity {
     //@Inject
     //NetApiService netApiService;   为什么NetApiService这个对象在NetServiceModule里实例化，NetServiceModule属于MainAppComponent  而MainComponent又依赖于MainAppComponent  却不能直接@Inject NetApiService对象呢
     //但是在SecondActivity里直接@Inject NetApiService对象却可以，
-    // 这是因为SecondComponent是MainAppComponent的子Component  可以获取MainAppComponent的方法 对象  不需要你在其对应的Component中写获取方法，而如果是dependencies方法，则需要在对应的Component中写获取方法
+    //这是因为SecondComponent是MainAppComponent的子Component  可以获取MainAppComponent的方法 对象  不需要你在其对应的Component中写获取方法，而如果是dependencies方法，则需要在对应的Component中写获取方法
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

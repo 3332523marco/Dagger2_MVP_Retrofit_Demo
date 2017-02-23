@@ -36,7 +36,7 @@ public class SecondPresenter {
         netApiService.contributors(owner, repo, new Callback<List<Contributions>>() {
             @Override
             public void success(List<Contributions> tests, Response response) {
-                Log.i(TAG, "tests " + tests.size());
+                Log.i(TAG, "tests " + response.getUrl());
                 secondActivity.setResponseView("value size " + tests.size());
             }
 

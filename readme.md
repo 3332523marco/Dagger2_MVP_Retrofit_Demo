@@ -23,7 +23,8 @@ M-Model-模型、V-View-视图、C-Controller-控制器，MVP作为MVC的演化�
 
 ##2、Dagger2
 ####2.1 简介
-Dagger2是Dagger1的分支，由谷歌公司接手开发，目前的版本是2.0。Dagger2是受到AutoValue项目的启发。 刚开始，Dagger2解决问题的基本思想是：利用生成和写的代码混合达到看似所有的产生和提供依赖的代码都是手写的样子。
+Dagger2的 上手是有门槛的，有门槛是因为它里边的概念多，用起来复杂，可是一旦你学会了Dagger2的使用，你一定会爱不释手的。与ButterKnife和AndroidAnnotations不同，Dagger2是由Google开发和维护（之前是Squreup），在 性能上可以说是做到的极致（Dagger2在编译期间进行了依赖注入，完全去除了反射机制），Dagger2要解决的问题也和ButterKnife以及AndroidAnnotations不同，后者主要是解决控件的初始化，线程的切换等等，而Dagger2则类似于Java中的Spring框架，主要是为了解决应用程序在运行时的耦合问题，使用Dagger2可以帮助我们实现低耦合高聚合。
+
 如果我们将Dagger2和1比较，他们两个在很多方面都非常相似，但也有很重要的区别，如下：
 
 * 再也没有使用反射：图的验证、配置和预先设置都在编译的时候执行。
@@ -31,7 +32,7 @@ Dagger2是Dagger1的分支，由谷歌公司接手开发，目前的版本是2.0
 * 更好的性能：谷歌声称他们提高了13%的处理性能
 * 代码混淆：使用派遣方法，就如同自己写的代码一样
 当然所有这些很棒的特点都需要付出一个代价，那就是缺乏灵活性，例如：Dagger2没用反射所以没有动态机制。
-
+![mahua](2.png)
 ####2.2 六大注解
 * @Inject: 通常在需要依赖的地方使用这个注解。换句话说，你用它告诉Dagger这个类或者字段需要依赖注入。这样，Dagger就会构造一个这个类的实例并满足他们的依赖。添加依赖注入对象，如果是直接在对象所在类里面注入，则前缀一定要大写，否则会报错
 * @Module: Modules类里面的方法专门提供依赖，所以我们定义一个类，用@Module注解，这样Dagger在构造类的实例的时候，就知道从哪里去找到需要的 依赖。modules的一个重要特征是它们设计为分区并组合在一起（比如说，在我们的   app中可以有多个组成在一起的modules）。
@@ -41,7 +42,6 @@ Dagger2是Dagger1的分支，由谷歌公司接手开发，目前的版本是2.0
 * @Scope: Scopes可是非常的有用，Dagger2可以通过自定义注解限定注解作用域。没必要让每个对象都去了解如何管理他们的实例。在scope的例子中，我们用自定义Demo中的`@SecondScope`注解类，只要标注了该注解的方法对象 都只能被SecondActivity所调用，而MainActivity则不能调用。同时Scopes作用域又是单列模式  和`@Singleton`一样，区别是`@Singleton`的作用域是全局 而自定义的Scope是可以限制区域 不让外部类调用。
 * @Qualifier: 当类的类型不足以鉴别一个依赖的时候,我们就可以使用这个注解标示。例如：在Android中，我们会需要不同类型的contextv所以我们就可以定义 qualifier注解“@ForApplication”和“@ForActivity”,这样当注入一个context的时候，我们就可以告诉 Dagger我们想要哪种类型的context。`@Named`是Dagger2对于@Qualifier一个默认实现,我们也可以自定义
 
-![mahua](2.png)
 ##3 Retrofit2
 ####3.1 简介
 Retrofit请求框架实现了高度的解耦，通过解析注解的得到的代理类生成http请求，然后将请求交给OkHttp。通过在Retrofit创建时生成的Converter再将OkHttp返回的数据进行类型转换得到自己需要的数据。

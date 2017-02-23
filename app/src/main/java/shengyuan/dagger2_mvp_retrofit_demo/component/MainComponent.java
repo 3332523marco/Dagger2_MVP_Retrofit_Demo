@@ -3,7 +3,6 @@ package shengyuan.dagger2_mvp_retrofit_demo.component;
 import dagger.Component;
 import shengyuan.dagger2_mvp_retrofit_demo.MainActivity;
 import shengyuan.dagger2_mvp_retrofit_demo.moudle.MainModule;
-import shengyuan.dagger2_mvp_retrofit_demo.presenter.MainPresenter;
 import shengyuan.dagger2_mvp_retrofit_demo.scope.ActivityScope;
 
 /**
@@ -14,7 +13,5 @@ import shengyuan.dagger2_mvp_retrofit_demo.scope.ActivityScope;
 public interface MainComponent {
 
     MainActivity inject(MainActivity mainActivity);//Dagger2会从目标类开始查找@Inject注解，自动生成依赖注入的代码，调用inject可完成依赖的注入。
-
-    MainPresenter presenter();
 
 }
