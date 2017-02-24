@@ -8,7 +8,7 @@ M-Model-模型、V-View-视图、C-Controller-控制器，MVP作为MVC的演化�
 ![mahua](3.png)
 
 ####1.2与MVC区别
-在MVC里，View是可以直接访问Model的！从而，View里会包含Model信息，不可避免的还要包括一些业务逻辑。所以当你修改View的时候会牵扯到Model,同时当你的后台线程引用着Activity导致Activity的资源无法被系统回收时会引起内存泄露和OOM。而MVP则很好的改善了MVC所存在的一些问题，分离了视图逻辑和业务逻辑，降低了耦合。 
+在MVC里，View是可以直接访问Model的！从而，View里会包含Model信息，不可避免的还要包括一些业务逻辑。所以当你修改View的时候会牵扯到Model,而且很容易造成代码冗余，难扩展复用、以及单元测试，同时当你的后台线程引用着Activity导致Activity的资源无法被系统回收时会引起内存泄露和OOM。而MVP则很好的改善了MVC所存在的一些问题，分离了视图逻辑和业务逻辑，降低了耦合。 
 
 ####1.3利弊
 利：
