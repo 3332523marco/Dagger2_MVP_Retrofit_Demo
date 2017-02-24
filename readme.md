@@ -7,7 +7,10 @@ M-Model-模型、V-View-视图、C-Controller-控制器，MVP作为MVC的演化�
 * 主持人（Presenter）：相当于协调者，是模型与视图之间的桥梁，将模型与视图分离开来。
 ![mahua](3.png)
 
-####1.2利弊
+####1.2与MVC区别
+在MVC里，View是可以直接访问Model的！从而，View里会包含Model信息，不可避免的还要包括一些业务逻辑。所以当你修改View的时候会牵扯到Model,同时当你的后台线程引用着Activity导致Activity的资源无法被系统回收时会引起内存泄露和OOM。而MVP则很好的改善了MVC所存在的一些问题，分离了视图逻辑和业务逻辑，降低了耦合。 
+
+####1.3利弊
 利：
 
 * 分离了视图逻辑和业务逻辑，降低了耦合
@@ -33,14 +36,17 @@ Dagger2的 上手是有门槛的，有门槛是因为它里边的概念多，用
 * 代码混淆：使用派遣方法，就如同自己写的代码一样
 当然所有这些很棒的特点都需要付出一个代价，那就是缺乏灵活性，例如：Dagger2没用反射所以没有动态机制。
 ![mahua](2.png)
+
 ####2.2 六大注解
+
 * @Inject: 通常在需要依赖的地方使用这个注解。换句话说，你用它告诉Dagger这个类或者字段需要依赖注入。这样，Dagger就会构造一个这个类的实例并满足他们的依赖。添加依赖注入对象，如果是直接在对象所在类里面注入，则前缀一定要大写，否则会报错
 * @Module: Modules类里面的方法专门提供依赖，所以我们定义一个类，用@Module注解，这样Dagger在构造类的实例的时候，就知道从哪里去找到需要的 依赖。modules的一个重要特征是它们设计为分区并组合在一起（比如说，在我们的   app中可以有多个组成在一起的modules）。
 * @Provide: 在modules中，我们定义的方法是用这个注解，以此来告诉Dagger我们想要构造对象并提供这些依赖。
 * @Component: Components从根本上来说就是一个注入器，也可以说是@Inject和@Module的桥梁，它的主要作用就是连接这两个部分。 Components可以提供所有定义了的类型的实例，比如：我们必须用@Component注解一个接口然后列出所有的@Modules组成该组件，如 果缺失了任何一块都会在编译的时候报错。所有的组件都可以通过它的modules知道依赖的范围。
 * @SubComponent:该注解从名字上就能知道，它是子Component，会完全继承父Component的所有依赖注入对象
-* @Scope: Scopes可是非常的有用，Dagger2可以通过自定义注解限定注解作用域。没必要让每个对象都去了解如何管理他们的实例。在scope的例子中，我们用自定义Demo中的`@SecondScope`注解类，只要标注了该注解的方法对象 都只能被SecondActivity所调用，而MainActivity则不能调用。同时Scopes作用域又是单列模式  和`@Singleton`一样，区别是`@Singleton`的作用域是全局 而自定义的Scope是可以限制区域 不让外部类调用。
-* @Qualifier: 当类的类型不足以鉴别一个依赖的时候,我们就可以使用这个注解标示。例如：在Android中，我们会需要不同类型的contextv所以我们就可以定义 qualifier注解“@ForApplication”和“@ForActivity”,这样当注入一个context的时候，我们就可以告诉 Dagger我们想要哪种类型的context。`@Named`是Dagger2对于@Qualifier一个默认实现,我们也可以自定义
+* @Scope: Scopes可是非常的有用，Dagger2可以通过自定义注解限定注解作用域。没必要让每个对象都去了解如何管理他们的实例。在scope的例子中，我们用自定义Demo中的`@SecondScope`注解类，只要标注了该注解的方法对象 以达到创建的类实例就与`SecondActivity`“共生死“ 同时Scopes作用域又是单列模式  和`@Singleton`一样，区别是`@Singleton`的作用域是全局 而自定义的Scope是可以跟随其activity的生命周期 即同生共死
+
+* @Qualifier: 当类的类型不足以鉴别一个依赖的时候,我们就可以使用这个注解标示。例如：在Android中，我们会需要不同类型的context所以我们就可以定义 qualifier注解“@ForApplication”和“@ForActivity”,这样当注入一个context的时候，我们就可以告诉 Dagger我们想要哪种类型的context。`@Named`是Dagger2对于@Qualifier一个默认实现,我们也可以自定义
 
 ##3 Retrofit2
 ####3.1 简介
