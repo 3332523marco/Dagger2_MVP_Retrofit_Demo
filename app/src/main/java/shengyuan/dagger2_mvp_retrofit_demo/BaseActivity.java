@@ -6,7 +6,7 @@ import android.os.Bundle;
 import shengyuan.dagger2_mvp_retrofit_demo.component.MainAppComponent;
 
 /**
- * Created by clevo on 2015/6/10.
+ * Created by Marco on 17/2/14.
  */
 public abstract  class BaseActivity extends Activity {
 
