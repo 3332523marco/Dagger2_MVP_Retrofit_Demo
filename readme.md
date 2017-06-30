@@ -1,5 +1,5 @@
-##1、MVP 
-####1.1简介
+## 1、MVP 
+#### 1.1简介
 M-Model-模型、V-View-视图、C-Controller-控制器，MVP作为MVC的演化版本，那么类似的MVP所对应的意义：M-Model-模型、V-View-视图、P-Presenter-表示器。 从MVC和MVP两者结合来看，Controlller/Presenter在MVC/MVP中都起着逻辑控制处理的角色，起着控制各业务流程的作用。而 MVP与MVC最不同的一点是M与V是不直接关联的也是就Model与View不存在直接关系，这两者之间间隔着的是Presenter层，其负责调控 View与Model之间的间接交互，MVP的结构图如下所示，对于这个图理解即可而不必限于其中的条条框框，毕竟在不同的场景下多少会有些出入的。在 Android中很重要的一点就是对UI的操作基本上需要异步进行也就是在MainThread中才能操作UI，所以对View与Model的切断分离是 合理的。此外Presenter与View、Model的交互使用接口定义交互操作可以进一步达到松耦合也可以通过接口更加方便地进行单元测试。
 
 * 模型（Model）：负责处理数据的加载或者存储，比如从网络或本地数据库获取数据等；
@@ -7,10 +7,10 @@ M-Model-模型、V-View-视图、C-Controller-控制器，MVP作为MVC的演化�
 * 主持人（Presenter）：相当于协调者，是模型与视图之间的桥梁，将模型与视图分离开来。
 ![mahua](3.png)
 
-####1.2与MVC区别
+#### 1.2与MVC区别
 在MVC里，View是可以直接访问Model的！从而，View里会包含Model信息，不可避免的还要包括一些业务逻辑。所以当你修改View的时候会牵扯到Model,而且很容易造成代码冗余，难扩展复用、以及单元测试，同时当你的后台线程引用着Activity导致Activity的资源无法被系统回收时会引起内存泄露和OOM。而MVP则很好的改善了MVC所存在的一些问题，分离了视图逻辑和业务逻辑，降低了耦合。 
 
-####1.3利弊
+#### 1.3利弊
 利：
 
 * 分离了视图逻辑和业务逻辑，降低了耦合
@@ -24,8 +24,8 @@ M-Model-模型、V-View-视图、C-Controller-控制器，MVP作为MVC的演化�
 * 小型app开发的时候比较冗余
 * 类方法创建得比较多
 
-##2、Dagger2
-####2.1 简介
+## 2、Dagger2
+#### 2.1 简介
 Dagger2的 上手是有门槛的，有门槛是因为它里边的概念多，用起来复杂，可是一旦你学会了Dagger2的使用，你一定会爱不释手的。与ButterKnife和AndroidAnnotations不同，Dagger2是由Google开发和维护（之前是Squreup），在 性能上可以说是做到的极致（Dagger2在编译期间进行了依赖注入，完全去除了反射机制），Dagger2要解决的问题也和ButterKnife以及AndroidAnnotations不同，后者主要是解决控件的初始化，线程的切换等等，而Dagger2则类似于Java中的Spring框架，主要是为了解决应用程序在运行时的耦合问题，使用Dagger2可以帮助我们实现低耦合高聚合。
 
 如果我们将Dagger2和1比较，他们两个在很多方面都非常相似，但也有很重要的区别，如下：
@@ -37,7 +37,7 @@ Dagger2的 上手是有门槛的，有门槛是因为它里边的概念多，用
 当然所有这些很棒的特点都需要付出一个代价，那就是缺乏灵活性，例如：Dagger2没用反射所以没有动态机制。
 ![mahua](2.png)
 
-####2.2 六大注解
+#### 2.2 六大注解
 
 * @Inject: 通常在需要依赖的地方使用这个注解。换句话说，你用它告诉Dagger这个类或者字段需要依赖注入。这样，Dagger就会构造一个这个类的实例并满足他们的依赖。添加依赖注入对象，如果是直接在对象所在类里面注入，则前缀一定要大写，否则会报错
 * @Module: Modules类里面的方法专门提供依赖，所以我们定义一个类，用@Module注解，这样Dagger在构造类的实例的时候，就知道从哪里去找到需要的 依赖。modules的一个重要特征是它们设计为分区并组合在一起（比如说，在我们的   app中可以有多个组成在一起的modules）。
@@ -48,8 +48,8 @@ Dagger2的 上手是有门槛的，有门槛是因为它里边的概念多，用
 
 * @Qualifier: 当类的类型不足以鉴别一个依赖的时候,我们就可以使用这个注解标示。例如：在Android中，我们会需要不同类型的context所以我们就可以定义 qualifier注解“@ForApplication”和“@ForActivity”,这样当注入一个context的时候，我们就可以告诉 Dagger我们想要哪种类型的context。`@Named`是Dagger2对于@Qualifier一个默认实现,我们也可以自定义
 
-##3 Retrofit2
-####3.1 简介
+## 3 Retrofit2
+#### 3.1 简介
 Retrofit请求框架实现了高度的解耦，通过解析注解的得到的代理类生成http请求，然后将请求交给OkHttp。通过在Retrofit创建时生成的Converter再将OkHttp返回的数据进行类型转换得到自己需要的数据。
 ![mahua](4.png)
 定义网络请求接口
@@ -60,7 +60,7 @@ Retrofit请求框架实现了高度的解耦，通过解析注解的得到的代
 注解Get表示使用的Get请求方式，{owner}代表要被替换的数据
 Converter默认是Gson解析，可以自定义
 
-####3.2 常用注解
+#### 3.2 常用注解
 * @Path：所有在网址中的参数（URL的问号前面），如：
      https://api.github.com/repos/{owner}/{repo}/contributors
 * @Query：URL问号后面的参数，如：
@@ -69,8 +69,8 @@ Converter默认是Gson解析，可以自定义
 * @Field：用于POST请求，提交单个数据
 * @Body：相当于多个@Field，以对象的形式提交    
 
-##4 Demo
-####4.1 简介
+## 4 Demo
+#### 4.1 简介
 
 ![mahua](1.png)
 
